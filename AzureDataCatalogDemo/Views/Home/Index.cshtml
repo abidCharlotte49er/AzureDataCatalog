@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Azure Data Catalog Demo";
+}
+
+<div class="jumbotron">
+    <h1>Azure Data Catalog Demo</h1>
+    <p class="lead">Description </p>
+    <form method="post" action="@Url.Action("AzureDCSearch", "Home")">
+        <div class="row">
+            <div class="col-md-4">
+                <input name="CatalogName" placeholder="Catalog Name" type="text" />
+            </div>
+            <div class="col-md-6">
+                <input name="SearchTerms" placeholder="Search Terms" type="text" />
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="btn btn-primary" name="searchBtn" value="Search" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--
+<div class="row">
+    <div class="col-md-4">
+        <h2>D1</h2>
+        <p>
+            Lorem Ipsum
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>D2</h2>
+        <p>Lorem ipsum 2</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>D3</h2>
+        <p>Lorem ipsum 3</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+    -->
