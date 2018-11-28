@@ -23,7 +23,7 @@ namespace AzureDataCatalogDemo.Controllers
         public ActionResult AzureDCSearch(FormCollection formData)
         {
             //ADCRequester adcRequester = new ADCRequester(); 
-            string upn = ADCRequester.AccessToken().Result.UserInfo.DisplayableId;
+           // string upn = ADCRequester.AccessToken().Result.UserInfo.DisplayableId;
 
             if(!String.IsNullOrEmpty(formData["CatalogName"]))
             {
@@ -40,12 +40,12 @@ namespace AzureDataCatalogDemo.Controllers
     /// </summary>
     public static class ADCRequester
     {
-     //   static string clientIDFromAzureAppRegistration = "376d6fb8-7af4-484c-8425-2f36b9301f3e"; // THIS IS where we need to provide ClientID from Data Catalog Registration 
-        static string clientIDFromAzureAppRegistration = "2371af84-f018-4d98-af2d-211b663436fa"; // THIS IS where we need to provide ClientID from Data Catalog Registration 
+        static string clientIDFromAzureAppRegistration = "{ClientID}"; // THIS IS where we need to provide ClientID from Data Catalog Registration 
+
         static AuthenticationResult authResult = null;
         public static string catalogName = "KeyBankDataCatalog"; // DefaultCatalog
 
-        public static async Task<AuthenticationResult> AccessToken()
+        static async Task<AuthenticationResult> AccessToken()
         {
             if (authResult == null)
             {
@@ -71,6 +71,35 @@ namespace AzureDataCatalogDemo.Controllers
 
             return authResult;
         }
+
+        /*public static async Task<AuthenticationResult> AccessToken()
+        {
+            if (authResult == null)
+            {
+                //Resource Uri for Data Catalog API
+                string resourceUri = "https://api.azuredatacatalog.com";
+
+                //To learn how to register a client app and get a Client ID, see https://msdn.microsoft.com/en-us/library/azure/mt403303.aspx#clientID   
+                string clientId = clientIDFromAzureAppRegistration;
+
+                //A redirect uri gives AAD more details about the specific application that it will authenticate.
+                //Since a client app does not have an external service to redirect to, this Uri is the standard placeholder for a client app.
+                string redirectUri = "https://login.live.com/oauth20_desktop.srf";
+
+                // Create an instance of AuthenticationContext to acquire an Azure access token
+                // OAuth2 authority Uri
+                string authorityUri = "https://login.windows.net/common/oauth2/authorize";
+                AuthenticationContext authContext = new AuthenticationContext(authorityUri);
+
+                // Call AcquireToken to get an Azure token from Azure Active Directory token issuance endpoint
+                //  AcquireToken takes a Client Id that Azure AD creates when you register your client app.
+                // authResult = await authContext.AcquireTokenAsync(resourceUri, clientId, new Uri(redirectUri), new PlatformParameters(PromptBehavior.Always));
+                //authResult = await authContext.AcquireTokenAsync(resourceUri, clientId, new Uri(redirectUri), new PlatformParameters(PromptBehavior.Never));
+                authResult = await authContext.AcquireTokenAsync(resourceUri, clientId, new UserPasswordCredential("shaikaz@kbisolation.onmicrosoft.com", "Azimshaik1991*#$"));
+            }
+
+            return authResult;
+        }*/
 
         public static string SearchDataAsset(string searchTerm)
         {
